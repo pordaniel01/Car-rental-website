@@ -1,0 +1,27 @@
+<div class="card my-5">
+    <h3>Logged in as: {{ user.userName }}</h3>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time of rent</th>
+            <th scope="col">Car</th>
+            <th scope="col">Picture</th>
+            <th scope="col" *ngIf="this.isAdmin">User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rent of rents">
+            <td>{{ rent.id }}</td>
+            <td>{{ rent.rentTime }}</td>
+            <td>{{ rent.car.name }}</td>
+            <td><img src="{{ rent.car.imageUrl }}" style="width:500px;height:300px;"></td>
+            <td *ngIf="this.isAdmin">{{ rent.user.userName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h6>Authorities: {{ user.authority }}</h6>
+
+  </div>

@@ -1,0 +1,31 @@
+<div class="card my-5">
+  <h3>Logged in as: {{ user.userName }}</h3>
+
+  <div class="card-body">
+    <a  [routerLink]="['/newcar']"><input type="button" class="btn blue"  *ngIf="this.isAdmin" value="Add car"></a>
+    <a  [routerLink]="['/rent']"><input type="button" class="btn blue"   value="View rents"></a>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Color</th>
+          <th scope="col">Image</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.id }}</td>
+          <td>{{ car.name }}</td>
+          <td>{{ car.color }}</td>
+          <td><img src="{{ car.imageUrl}}" style="width:500px;height:300px;"></td>
+          <td><a [routerLink]="['/cars', car.id]"><input type="button" class="btn blue"  *ngIf="this.isUser" value="Rent" ></a> <input type="button" class="btn red" *ngIf="this.isAdmin" value="Delete"  (click)="delete( car.id )"> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<style>body{
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}</style> 

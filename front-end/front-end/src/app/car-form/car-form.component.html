@@ -1,0 +1,10 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<p>{{ car.id }}</p>
+<p>{{ car.name }}</p>
+<p>{{ car.color }}</p>
+<img src="{{ car.imageUrl}}" style="width:500px;height:300px;">
+<input type="button" class="btn blue"  value="Rent" (click)="rent(car.id)" >
