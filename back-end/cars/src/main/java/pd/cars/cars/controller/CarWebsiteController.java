@@ -1,5 +1,6 @@
 package pd.cars.cars.controller;
 
+import org.apache.coyote.Response;
 import org.apache.tomcat.util.http.HeaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -88,6 +90,14 @@ public class CarWebsiteController {
         return ResponseEntity.ok(rent);
     }
 
+    @GetMapping("isrented/{id}")
+    public ResponseEntity isCarRented(@PathVariable Long id){
+        Car car = carService.findById(id);
+        if(rentService.findByCar(car) != null)
+            return ResponseEntity.ok().body("true");
+        else
+            return ResponseEntity.ok().body("false");
+    }
 
     @DeleteMapping("/cars/{id}")
     public ResponseEntity delete(@PathVariable Long id){
@@ -106,5 +116,10 @@ public class CarWebsiteController {
         return ResponseEntity.created(new URI(BASE_URI + "/" +saveItem.getId()))
                 .headers(headers)
                 .body(saveItem);
+    }
+
+    @DeleteMapping("/rents/{id}")
+    public ResponseEntity<Rent> deleteRent(@PathVariable Long id){
+        return ResponseEntity.ok().body(rentService.delete(id));
     }
 }

@@ -44,4 +44,24 @@ public class RentService {
         }
         return userRents;
     }
+
+    @Transactional
+    public Rent findByCar(Car car){
+        List<Rent> rents = rentRepository.findAll();
+        for(Rent rent : rents){
+            System.out.println("db car: " + rent.getCar().getId() + "given car is: " + car.getId());
+            if(rent.getCar().getId() == car.getId()) {
+                System.out.println("found");
+                return rent;
+            }
+        }
+        return null;
+    }
+
+    @Transactional
+    public Rent delete(Long id){
+        Optional<Rent> rent = rentRepository.findById(id);
+        rentRepository.deleteById(id);
+        return rent.get();
+    }
 }
