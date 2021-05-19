@@ -26,7 +26,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
-        System.out.println(name + "authtt");
         if (userRepository.findByUserName(name).getPassword().equals(password)) {
             return new UsernamePasswordAuthenticationToken(
                     name, password, new ArrayList<>());

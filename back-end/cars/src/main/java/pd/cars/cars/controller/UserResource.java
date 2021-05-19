@@ -3,19 +3,15 @@ package pd.cars.cars.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import pd.cars.cars.model.AuthRequest;
 import pd.cars.cars.model.User;
 import pd.cars.cars.repository.UserRepository;
 import pd.cars.cars.service.UserService;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -28,13 +24,15 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
-
-
     @PostMapping("/register")
-    public ResponseEntity<User> createUser( @RequestBody User user) throws URISyntaxException {
+    public ResponseEntity createUser( @RequestBody User user) throws URISyntaxException {
 
-        System.out.println("user: " + user.getUserName());
         user.setAuthority("ROLE_USER");
+        if(userService.userValid(user).equals("user"))
+            return ResponseEntity.ok().body("user");
+        if(userService.userValid(user).equals("email"))
+            return ResponseEntity.ok().body("email");
+
         userService.save(user);
         HttpHeaders headers = new HttpHeaders();
         String message = "User entity created";
@@ -48,6 +46,14 @@ public class UserResource {
     public ResponseEntity<User> getUserInfo()throws URISyntaxException {
         String user = SecurityContextHolder.getContext().getAuthentication().getName();
         User userEntity = userRepository.findByUserName(user);
+        //System.out.println(userEntity.getUserName());
         return ResponseEntity.ok().body(userEntity);
     }
+    
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getUsers(){
+        return ResponseEntity.ok().body(userService.findAll());
+    }
+    
+    
 }

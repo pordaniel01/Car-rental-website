@@ -30,7 +30,7 @@ ALTER TABLE rent
 
    INSERT INTO public.users(
    	 username, user_email, active, password_hash, authority)
-   	VALUES ( 'pd', 'pd', 'true', 'pd', 'ROLE_USER,ROLE_ADMIN');
+   	VALUES ( 'pd1234', 'asd@tma.com', 'true', 'pd4321', 'ROLE_USER,ROLE_ADMIN');
 INSERT INTO public.cars(
 	 car_name, car_color, image_url)
 	VALUES ( 'toyota', 'sand', 'http://images.gtcarlot.com/pictures/24381066.jpg');

@@ -84,6 +84,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
+                //.antMatchers(HttpMethod.GET, "/api/user").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST,"/**").hasRole("USER")
                 .anyRequest().authenticated();
@@ -91,14 +92,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-        //        .dataSource(dataSource)
-        //        .usersByUsernameQuery("select username, password_hash, active from users where username=?")
-        //        .authoritiesByUsernameQuery("select username, authority from users where username=?");
-               // .inMemoryAuthentication()
-               // .withUser("user")
-               // .password("user")
-               // .authorities("ROLE_USER");
         auth.authenticationProvider(authProvider);
     }
 

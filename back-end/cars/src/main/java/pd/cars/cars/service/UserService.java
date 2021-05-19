@@ -34,4 +34,16 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public String userValid(User givenUser){
+        List<User> users = userRepository.findAll();
+        for(User user : users){
+            if(user.getEmail().equals(givenUser.getEmail()))
+                return "email";
+            if(user.getUserName().equals(givenUser.getUserName()))
+                return "user";
+        }
+        return "";
+    }
 }
