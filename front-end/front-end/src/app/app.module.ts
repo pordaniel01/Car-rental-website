@@ -15,6 +15,7 @@ import { NewCarFormComponent } from './new-car-form/new-car-form.component';
 import { RentComponent } from './rent/rent.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { EditCarComponent } from './edit-car/edit-car.component';
     NewCarFormComponent,
     RentComponent,
     UserFormComponent,
-    EditCarComponent
+    EditCarComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,

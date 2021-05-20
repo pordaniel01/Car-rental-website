@@ -62,8 +62,14 @@ export class RestapiService {
     let url = "http://localhost:8080/api/car-rental/isrented/" + id;
     return this.http.get(url,{ withCredentials:true , responseType: 'text' });
   }
+  public getUserInfo(){
+    return this.http.get<User>('http://localhost:8080/api/user',{ withCredentials:true }); 
+  }
   public getUsers(){
     return this.http.get<User[]>("http://localhost:8080/api/users",{ withCredentials:true });
+  }
+  public updateUser(user:User){
+    return this.http.put<User>("http://localhost:8080/api/user", user,{ withCredentials:true });
   }
   public deleteUser(id:Number){
     let url = "http://localhost:8080/api/user/" + id;

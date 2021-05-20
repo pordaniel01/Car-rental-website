@@ -1,7 +1,7 @@
 <body>
 <h1 >PD CAR WEBSITE</h1>
 <div class="card my-5">
-  <h3>Logged in as: {{ user.userName }}</h3>
+  <a  [routerLink]="['/user']"><h3>Logged in as: {{ user.userName }}</h3></a>
 
   <div class="card-body">
     <a  [routerLink]="['/newcar']"><input type="button" class="btn blue"  *ngIf="this.isAdmin" value="Add car"></a>
