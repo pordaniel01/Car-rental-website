@@ -69,7 +69,6 @@ export class RegisterComponent implements OnInit {
       }
       else
         this.router.navigate(['/login']);
-      console.log(this.isEmailInvalid);
     });
   }
 

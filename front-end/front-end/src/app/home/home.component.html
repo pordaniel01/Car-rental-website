@@ -4,6 +4,7 @@
   <div class="card-body">
     <a  [routerLink]="['/newcar']"><input type="button" class="btn blue"  *ngIf="this.isAdmin" value="Add car"></a>
     <a  [routerLink]="['/rent']"><input type="button" class="btn blue"   value="View rents"></a>
+    <input type="button" class="btn blue"   value="Log out" (click)="deleteAllCookies()">
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
         <tr>
@@ -20,7 +21,11 @@
           <td>{{ car.name }}</td>
           <td>{{ car.color }}</td>
           <td><img src="{{ car.imageUrl}}" style="width:500px;height:300px;"></td>
-          <td><a [routerLink]="['/cars', car.id]"><input type="button" class="btn blue"  *ngIf="this.isUser" value="Rent" ></a> <input type="button" class="btn red" *ngIf="this.isAdmin" value="Delete"  (click)="delete( car.id )"> </td>
+          <td>
+            <a [routerLink]="['/cars', car.id]"><input type="button" class="btn blue"  *ngIf="this.isUser" value="Rent" ></a>
+            <a [routerLink]="['/editcar', car.id]"><input type="button" class="btn blue"  *ngIf="this.isAdmin" value="Edit" ></a>
+            <input type="button" class="btn red" *ngIf="this.isAdmin" value="Delete"  (click)="delete( car.id )">
+         </td>
         </tr>
       </tbody>
     </table>

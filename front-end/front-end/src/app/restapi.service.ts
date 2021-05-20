@@ -19,10 +19,14 @@ export class RestapiService {
   }
   public register(user:User){
 
-    return this.http.post("http://localhost:8080/api/register",user,{   withCredentials:true });
+    return this.http.post("http://localhost:8080/api/register",user,{   withCredentials:true, responseType:'text' });
   }
-  public isLoggedIn(){
-
+  public editCar(car:Car, id:Number){
+    let url = "http://localhost:8080/api/car-rental/cars/" + id;
+    return this.http.put(url,car,{   withCredentials:true });
+  }
+  public logout(){
+    return this.http.get("http://localhost:8080/api/logout",{ withCredentials:true });
   }
   public getCars(){
     return this.http.get<Car[]>("http://localhost:8080/api/car-rental/cars/",{   withCredentials:true });

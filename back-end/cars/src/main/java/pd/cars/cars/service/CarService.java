@@ -38,4 +38,12 @@ public class CarService {
     public void delete(Long id) {
         carRepository.deleteById(id);
     }
+
+    public void editCar(Long id, Car car){
+        Car carToEdit = carRepository.getOne(id);
+        carToEdit.setName(car.getName());
+        carToEdit.setColor(car.getColor());
+        carToEdit.setImageUrl(car.getImageUrl());
+        carRepository.save(carToEdit);
+    }
 }

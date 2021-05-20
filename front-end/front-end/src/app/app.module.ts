@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { NewCarFormComponent } from './new-car-form/new-car-form.component';
 import { RentComponent } from './rent/rent.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { EditCarComponent } from './edit-car/edit-car.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { UserFormComponent } from './user-form/user-form.component';
     CarFormComponent,
     NewCarFormComponent,
     RentComponent,
-    UserFormComponent
+    UserFormComponent,
+    EditCarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { UserFormComponent } from './user-form/user-form.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'cars/:carId', component: CarFormComponent },
+      { path: 'editcar/:carId', component: EditCarComponent },
       { path: 'newcar', component: NewCarFormComponent },
       { path: 'rent', component: RentComponent }
     ])

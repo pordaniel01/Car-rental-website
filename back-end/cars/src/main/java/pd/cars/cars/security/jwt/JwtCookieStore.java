@@ -40,6 +40,7 @@ public class JwtCookieStore {
     }
 
     private void storeTokenInCookie(HttpServletResponse response, String token) {
+        System.out.println("store token");
         Cookie cookie = new Cookie(COOKIE_NAME, token);
         cookie.setMaxAge(EXPIRATION);
         cookie.setPath("/");
@@ -87,7 +88,6 @@ public class JwtCookieStore {
             }
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                     username, null, auths);
-
             return Optional.of(auth);
         }
         return Optional.empty();

@@ -1,0 +1,26 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="{{ this.imageUrl }}" id="icon" alt="User Icon" *ngIf="this.imageUrl!=null"  />
+    </div>
+
+    <!-- Login Form -->
+    <h2 > {{this.message}}</h2>
+    <form>
+      <input type="text" id="carName" class="fadeIn second" name="carName"  [(ngModel)]="carName"  placeholder="{{this.carName}}">
+      <input type="text" id="carColor" class="fadeIn third" name="carColor" [(ngModel)]="carColor" value="{{this.carColor}}">
+      <input type="text" id="imageUrl" class="fadeIn third" name="imageUrl" [(ngModel)]="imageUrl" value="{{this.imageUrl}}">
+      <input type="submit" class="fadeIn fourth" value="Edit Car" (click)="editCar()">
+    </form>
+
+
+  </div>
+</div>

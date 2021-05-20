@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, timer } from 'rxjs';
 import { Car } from '../car';
 import { RestapiService } from '../restapi.service';
 import { User } from '../user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   isAdmin!:boolean;
   isUser!:boolean;
 
-  constructor(private service: RestapiService, private router: Router) { }
+  constructor(private service: RestapiService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.getUserData();
@@ -51,7 +51,9 @@ export class HomeComponent implements OnInit {
     
   }
 
-
+  deleteAllCookies() {
+    this.service.logout().subscribe(()=>this.router.navigate(['/login'])    );
+  }
   
   rent(id:Number){
     this.service.rent(id).subscribe(()=> console.log("rentt"));
@@ -61,9 +63,13 @@ export class HomeComponent implements OnInit {
     this.service.getCars().subscribe((data: Car[]) => {
       this.cars = data;
       if(confirm("Are you sure you want to delete this car?")) {
-        this.service.deleteCar(carid).subscribe();
+        this.service.deleteCar(carid).subscribe(()=>this.service.getCars().subscribe((data: Car[]) => this.cars = data),
+        (error: HttpErrorResponse) => {
+          if(error.status == 500)
+            window.alert("Car is currently rented, cannot delete it. First end the rent!");
+        });
       }
-      this.service.getCars().subscribe((data: Car[]) => this.cars = data);
+      
     });
     
   }

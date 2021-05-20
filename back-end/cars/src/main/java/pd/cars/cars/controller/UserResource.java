@@ -1,5 +1,6 @@
 package pd.cars.cars.controller;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +10,11 @@ import pd.cars.cars.model.User;
 import pd.cars.cars.repository.UserRepository;
 import pd.cars.cars.service.UserService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -48,6 +52,18 @@ public class UserResource {
         User userEntity = userRepository.findByUserName(user);
         return ResponseEntity.ok().body(userEntity);
     }
+    
+    @GetMapping("/logout")
+    public void logout(HttpServletResponse response){
+        Cookie cookie = new Cookie("token","");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addHeader("Access-Control-Expose-Headers", "Set-Cookie");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,UPDATE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
+        response.addCookie(cookie);
+    }
+    
     
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){

@@ -64,6 +64,12 @@ public class CarWebsiteController {
             return ResponseEntity.ok(foundCar);
     }
 
+    @PutMapping("/cars/{id}")
+    public ResponseEntity<Car> editCarById(@PathVariable Long id,@RequestBody Car car){
+        carService.editCar(id,car);
+        return ResponseEntity.ok(car);
+    }
+
     @GetMapping("/rents")
     public ResponseEntity<List<Rent>> getRents(){
         boolean isAdmin = false;
