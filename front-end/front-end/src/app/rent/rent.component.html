@@ -9,6 +9,7 @@
             <th scope="col">Car</th>
             <th scope="col">Picture</th>
             <th scope="col" *ngIf="this.isAdmin">User</th>
+            <th scope="col" *ngIf="this.isAdmin"></th>
           </tr>
         </thead>
         <tbody>
@@ -18,10 +19,10 @@
             <td>{{ rent.car.name }}</td>
             <td><img src="{{ rent.car.imageUrl }}" style="width:500px;height:300px;"></td>
             <td *ngIf="this.isAdmin">{{ rent.user.userName }}</td>
+            <td *ngIf="this.isAdmin"><input type="button" class="btn red" *ngIf="this.isAdmin" value="End rent"  (click)="deleteRent( rent.id )"></td>
           </tr>
         </tbody>
       </table>
     </div>
     <h6>Authorities: {{ user.authority }}</h6>
-
   </div>

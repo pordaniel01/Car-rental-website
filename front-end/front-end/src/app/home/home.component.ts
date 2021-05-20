@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, timer } from 'rxjs';
@@ -20,9 +21,8 @@ export class HomeComponent implements OnInit {
   constructor(private service: RestapiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCars();
     this.getUserData();
-    
+    this.getCars();
   }
 
   getCars(){
@@ -35,15 +35,24 @@ export class HomeComponent implements OnInit {
 
   getUserData(){
     this.service.getLoggedInUserDetails().subscribe((data: User) => {
+      console.log(data.id);
       this.user = data;
       if(this.user.authority.includes('USER'))
-      this.isUser = true;
-      if(this.user.authority.includes('ADMIN'))
-      this.isAdmin = true;   
+        this.isUser = true;
+      else if(this.user.authority.includes('ADMIN'))
+        this.isAdmin = true; 
+     
+      
+    },
+    (error: HttpErrorResponse) => {
+      if(error.status == 401)
+        this.router.navigate(['/login']);    
     });
     
   }
 
+
+  
   rent(id:Number){
     this.service.rent(id).subscribe(()=> console.log("rentt"));
   }

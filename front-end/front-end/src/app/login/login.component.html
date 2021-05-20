@@ -13,9 +13,11 @@
     </div>
 
     <!-- Login Form -->
+    <h2 > {{this.message}}</h2>
+
     <form>
       <input type="text" id="username" class="fadeIn second"  [(ngModel)]="username" name="username" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" [(ngModel)]="password" name="login" placeholder="password">
+      <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="login" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
       <input type="button" class="fadeIn fourth" value="Register" (click)="register()">
     </form>

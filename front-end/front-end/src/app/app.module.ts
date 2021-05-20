@@ -13,6 +13,7 @@ import { CarFormComponent } from './car-form/car-form.component';
 import { RouterModule } from '@angular/router';
 import { NewCarFormComponent } from './new-car-form/new-car-form.component';
 import { RentComponent } from './rent/rent.component';
+import { UserFormComponent } from './user-form/user-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { RentComponent } from './rent/rent.component';
     RegisterComponent,
     CarFormComponent,
     NewCarFormComponent,
-    RentComponent
+    RentComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

@@ -15,8 +15,11 @@
     <!-- Login Form -->
     <form>
       <input type="text" id="username" class="fadeIn second"  [(ngModel)]="username" name="username" placeholder="username">
-      <input type="text" id="password" class="fadeIn third" [(ngModel)]="password" name="login" placeholder="password">
-      <input type="text" id="email" class="fadeIn third" [(ngModel)]="email" name="email" placeholder="email">
+      <h2 *ngIf="this.isUserInvalid"> {{this.userMessage}}</h2>
+      <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="login" placeholder="password">
+      <h2 *ngIf="this.isPasswordInvalid">{{this. passwordMessage}}</h2>
+      <input type="email" id="email" class="fadeIn third" [(ngModel)]="email" name="email" placeholder="email">
+      <h2 *ngIf="this.isEmailInvalid">{{this.emailMessage}}</h2>
       <input type="submit" class="fadeIn fourth" value="Register" (click)="register()">
     </form>
 

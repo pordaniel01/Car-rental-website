@@ -30,10 +30,10 @@ ALTER TABLE rent
 
    INSERT INTO public.users(
    	 username, user_email, active, password_hash, authority)
-   	VALUES ( 'pd1234', 'asd@tma.com', 'true', 'pd4321', 'ROLE_USER,ROLE_ADMIN');
+   	VALUES ( 'pd1234', 'asd@tma.com', 'true', 'pd4321', 'ROLE_ADMIN');
 INSERT INTO public.cars(
 	 car_name, car_color, image_url)
 	VALUES ( 'toyota', 'sand', 'http://images.gtcarlot.com/pictures/24381066.jpg');
    INSERT INTO public.cars(
       	 car_name, car_color, image_url)
-      	VALUES ( 'Renault','Grey','https://www.carscoops.com/wp-content/uploads/2019/05/94b05272-renault-scenic-black-edition-france-14-1024x555.jpg');
+      	VALUES ( 'Renault','Grey','https://verdam.hu/images/20170703/595a44d2b056d/595a44f96a1d1.jpg');

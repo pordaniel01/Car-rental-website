@@ -7,4 +7,5 @@
 <p>{{ car.name }}</p>
 <p>{{ car.color }}</p>
 <img src="{{ car.imageUrl}}" style="width:500px;height:300px;">
-<input type="button" class="btn blue"  value="Rent" (click)="rent(car.id)" >
+<input type="button" class="btn blue"  *ngIf="!this.isRented"  value="Rent" (click)="rent(car.id)" >
+<p *ngIf="this.isRented">Car is already rented!</p>

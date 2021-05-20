@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthRequest } from '../auth-request';
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   username!: string;
   password!:string;
-  message:any;
+  message!:string;
 
   constructor(private service: RestapiService, private router: Router ) { }
 
@@ -25,8 +26,12 @@ export class LoginComponent implements OnInit {
     auth.password = this.password;
     let response = this.service.login(auth);
     response.subscribe( data=>{
-      console.log(data);
       this.router.navigate(['/home']);
+    },
+    (error: HttpErrorResponse) => {
+      if(error.status == 401){
+        this.message = "Unsuccessful login";  
+      }
     })
   }
 

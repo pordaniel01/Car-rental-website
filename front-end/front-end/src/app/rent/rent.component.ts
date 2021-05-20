@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Car } from '../car';
@@ -21,15 +22,21 @@ export class RentComponent implements OnInit {
   constructor(private service: RestapiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getRentedCars();
     this.getUserData();
+
+    this.getRentedCars();
   }
   
   getRentedCars(){
     this.service.getRent().subscribe((data: Rent[]) => {
       this.rents = data;
-      this.rents.forEach((rent)=>console.log("asd" + rent.rentTime));
-    })
+    });
+    this.getUserData();
+    setInterval(()=>{this.service.getRent().subscribe((data: Rent[]) => {
+      this.rents = data;
+      this.getUserData();
+
+    })}, 5 * 1000);
   }
 
   getUserData(){
@@ -39,7 +46,17 @@ export class RentComponent implements OnInit {
       this.isUser = true;
       if(this.user.authority.includes('ADMIN'))
       this.isAdmin = true;   
+    },
+    (error: HttpErrorResponse) => {
+      if(error.status == 401)
+        this.router.navigate(['/login']);    
     });
+    
+  }
+  deleteRent(id:Number){
+    this.service.deleteRent(id).subscribe(()=>
+      this.getRentedCars()
+    );
     
   }
 

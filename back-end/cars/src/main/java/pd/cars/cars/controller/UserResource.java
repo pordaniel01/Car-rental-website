@@ -46,7 +46,6 @@ public class UserResource {
     public ResponseEntity<User> getUserInfo()throws URISyntaxException {
         String user = SecurityContextHolder.getContext().getAuthentication().getName();
         User userEntity = userRepository.findByUserName(user);
-        //System.out.println(userEntity.getUserName());
         return ResponseEntity.ok().body(userEntity);
     }
     

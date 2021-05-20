@@ -18,8 +18,11 @@ export class RestapiService {
     return this.http.post("http://localhost:8080/api/auth",auth,{   withCredentials:true });
   }
   public register(user:User){
-    
+
     return this.http.post("http://localhost:8080/api/register",user,{   withCredentials:true });
+  }
+  public isLoggedIn(){
+
   }
   public getCars(){
     return this.http.get<Car[]>("http://localhost:8080/api/car-rental/cars/",{   withCredentials:true });
@@ -38,8 +41,6 @@ export class RestapiService {
   public rent(id:Number) {
     let url = "http://localhost:8080/api/car-rental/cars/" + id;
     console.log('ge');
-    //let headers = new Headers({ 'Content-Type': 'application/json' });
-    //let options = new RequestOptions({ headers: headers, withCredentials: false });
     return this.http.post(url, null, {   withCredentials:true });
   }
   public getRent(){
@@ -47,5 +48,13 @@ export class RestapiService {
   }
   public createNewCar(car:Car){
     return this.http.post("http://localhost:8080/api/car-rental/cars/",car, {   withCredentials:true });
+  }
+  public deleteRent(id:Number){
+    let url = "http://localhost:8080/api/car-rental/rents/" + id;
+    return this.http.delete(url,{ withCredentials:true });
+  }
+  public isCarRented(id:Number){
+    let url = "http://localhost:8080/api/car-rental/isrented/" + id;
+    return this.http.get(url,{ withCredentials:true , responseType: 'text' });
   }
 }
