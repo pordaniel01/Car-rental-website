@@ -5,6 +5,7 @@ import { Car } from './car';
 import { User } from './user';
 import { RequestOptions, Headers } from '@angular/http';
 import { Rent } from './rent';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,12 @@ export class RestapiService {
   public isCarRented(id:Number){
     let url = "http://localhost:8080/api/car-rental/isrented/" + id;
     return this.http.get(url,{ withCredentials:true , responseType: 'text' });
+  }
+  public getUsers(){
+    return this.http.get<User[]>("http://localhost:8080/api/users",{ withCredentials:true });
+  }
+  public deleteUser(id:Number){
+    let url = "http://localhost:8080/api/user/" + id;
+    return this.http.delete<User>(url, {withCredentials:true});
   }
 }

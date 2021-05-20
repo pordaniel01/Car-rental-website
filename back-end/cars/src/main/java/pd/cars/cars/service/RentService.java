@@ -39,8 +39,11 @@ public class RentService {
         List<Rent> rents = rentRepository.findAll();
         ArrayList<Rent> userRents = new ArrayList<Rent>();
         for(Rent rent : rents){
-            if(rent.getUser().equals(user))
+
+            if(rent.getUser().getId() == user.getId()) {
                 userRents.add(rent);
+                System.out.println("rent user:" + rent.getUser().getId() + "user to match: " + user.getId());
+            }
         }
         return userRents;
     }

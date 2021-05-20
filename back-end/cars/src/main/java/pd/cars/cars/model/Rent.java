@@ -1,5 +1,8 @@
 package pd.cars.cars.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,10 +17,12 @@ public class Rent {
 
     @OneToOne
     @JoinColumn(name = "fk_car", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Car car;
 
     @ManyToOne
     @JoinColumn(name="fk_user", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Column(name = "rent_ts")

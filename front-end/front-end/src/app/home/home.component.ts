@@ -33,16 +33,14 @@ export class HomeComponent implements OnInit {
             
   }
 
-  getUserData(){
+  public  getUserData(){
     this.service.getLoggedInUserDetails().subscribe((data: User) => {
       console.log(data.id);
       this.user = data;
       if(this.user.authority.includes('USER'))
         this.isUser = true;
       else if(this.user.authority.includes('ADMIN'))
-        this.isAdmin = true; 
-     
-      
+        this.isAdmin = true;    
     },
     (error: HttpErrorResponse) => {
       if(error.status == 401)

@@ -16,7 +16,10 @@ html {
     text-decoration: none;
     font-weight: 400;
   }
-  
+  h1 {text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: deeppink;
+  }
   h2 {
     text-align: center;
     font-size: 16px;

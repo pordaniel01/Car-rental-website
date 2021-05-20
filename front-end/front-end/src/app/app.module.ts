@@ -38,6 +38,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
       { path: 'cars/:carId', component: CarFormComponent },
       { path: 'editcar/:carId', component: EditCarComponent },
       { path: 'newcar', component: NewCarFormComponent },
+      { path: 'users', component: UserFormComponent },
       { path: 'rent', component: RentComponent }
     ])
   ],

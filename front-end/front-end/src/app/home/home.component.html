@@ -6,6 +6,7 @@
   <div class="card-body">
     <a  [routerLink]="['/newcar']"><input type="button" class="btn blue"  *ngIf="this.isAdmin" value="Add car"></a>
     <a  [routerLink]="['/rent']"><input type="button" class="btn blue"   value="View rents"></a>
+    <a  [routerLink]="['/users']"><input type="button" class="btn blue" *ngIf="this.isAdmin"   value="View users"></a>
     <input type="button" class="btn blue"   value="Log out" (click)="deleteAllCookies()">
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">

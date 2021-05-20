@@ -75,12 +75,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id == user.id &&
-                active == user.active &&
-                Objects.equals(userName, user.userName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(authority, user.authority);
+        return id == user.id;
     }
 
     @Override

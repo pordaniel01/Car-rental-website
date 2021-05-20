@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pd.cars.cars.model.User;
 import pd.cars.cars.repository.UserRepository;
+import pd.cars.cars.service.RentService;
 import pd.cars.cars.service.UserService;
 
 import javax.servlet.http.Cookie;
@@ -27,6 +28,9 @@ public class UserResource {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RentService rentService;
 
     @PostMapping("/register")
     public ResponseEntity createUser( @RequestBody User user) throws URISyntaxException {
@@ -51,6 +55,17 @@ public class UserResource {
         String user = SecurityContextHolder.getContext().getAuthentication().getName();
         User userEntity = userRepository.findByUserName(user);
         return ResponseEntity.ok().body(userEntity);
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+        User user = userRepository.getOne(id);
+        rentService.findByUser(user).forEach(rent -> {
+            System.out.println("rent:" + rent.getId());
+            rentService.delete(rent.getId());
+        });
+        userRepository.delete(user);
+        return ResponseEntity.ok(user);
     }
     
     @GetMapping("/logout")
