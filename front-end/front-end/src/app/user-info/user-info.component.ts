@@ -15,6 +15,8 @@ export class UserInfoComponent implements OnInit {
   email!:string;
   password!:string;
   modifyState!:boolean;
+  userMessage!:string;
+  emailMessage!:string;
 
   constructor(private service: RestapiService, private router: Router) { this.modifyState = false; }
 
@@ -37,6 +39,8 @@ export class UserInfoComponent implements OnInit {
 
   submit(){
     let user = new User();
+    this.userMessage = "";
+    this.emailMessage = "";
     console.log("asd");
     if( this.password == null || this.password.length < 5   ){
       window.alert("Password must be longer than 5")
@@ -50,11 +54,21 @@ export class UserInfoComponent implements OnInit {
       window.alert("Wrong email format");
       return;
     }
+    user.id = this.user.id;
+    console.log(user.id);
     user.email = this.email;
     user.password = this.password;
     user.userName = this.userName;
-    this.service.updateUser(user).subscribe(()=>{
-      this.router.navigate(["/home"])
+    this.service.updateUser(user).subscribe( (data:any) => {
+      console.log(data);
+      if(data === "user"){
+        this.userMessage = "Username taken";
+      }
+      else if(data === "email"){
+        this.emailMessage = "Email already registered";
+      }
+      else
+        this.router.navigate(['/login']);
     });
   }
 }

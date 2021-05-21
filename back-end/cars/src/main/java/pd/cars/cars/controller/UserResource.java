@@ -58,7 +58,12 @@ public class UserResource {
     }
 
     @PutMapping("/user")
-    public ResponseEntity<User> updateUserInfo(@RequestBody User user){
+    public ResponseEntity updateUserInfo(@RequestBody User user){
+        if(userService.userValid(user).equals("user"))
+            return ResponseEntity.ok().body("user");
+        if(userService.userValid(user).equals("email"))
+            return ResponseEntity.ok().body("email");
+
         userService.editUser(user);
         return ResponseEntity.ok(user);
     }

@@ -69,7 +69,7 @@ export class RestapiService {
     return this.http.get<User[]>("http://localhost:8080/api/users",{ withCredentials:true });
   }
   public updateUser(user:User){
-    return this.http.put<User>("http://localhost:8080/api/user", user,{ withCredentials:true });
+    return this.http.put("http://localhost:8080/api/user", user,{ withCredentials:true, responseType:"text"  });
   }
   public deleteUser(id:Number){
     let url = "http://localhost:8080/api/user/" + id;

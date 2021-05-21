@@ -40,9 +40,9 @@ public class UserService {
     public String userValid(User givenUser){
         List<User> users = userRepository.findAll();
         for(User user : users){
-            if(user.getEmail().equals(givenUser.getEmail()))
+            if(user.getEmail().equals(givenUser.getEmail()) && user.getId() != givenUser.getId())
                 return "email";
-            if(user.getUserName().equals(givenUser.getUserName()))
+            if(user.getUserName().equals(givenUser.getUserName()) && user.getId() != givenUser.getId())
                 return "user";
         }
         return "";
@@ -55,4 +55,5 @@ public class UserService {
         userToEdit.setUserName(user.getUserName());
         userRepository.save(userToEdit);
     }
+
 }

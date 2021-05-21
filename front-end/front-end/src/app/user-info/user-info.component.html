@@ -2,7 +2,9 @@
 <p>email: {{this.user.email}}</p>
 
 <input type="text" id="userName" class="fadeIn second" name="userName"  *ngIf="this.modifyState" [(ngModel)]="userName"  placeholder="{{this.user.userName}}">
+<h2 > {{this.userMessage}}</h2>
 <input type="text" id="email" class="fadeIn second" name="email"    *ngIf="this.modifyState" [(ngModel)]="email"  placeholder="{{this.user.email}}">
+<h2 >{{this.emailMessage}}</h2>
 <input type="password" id="password" class="fadeIn second" name="password"  *ngIf="this.modifyState" [(ngModel)]="password"  placeholder="new password">
 <input type="button" class="btn red" *ngIf="!this.modifyState" value="Modify"  (click)="modify( )">
 <input type="button" class="btn red" *ngIf="this.modifyState" value="Submit changes"  (click)="submit( )">
